@@ -119,6 +119,11 @@
         <div class="total">
            <strong id="cartTotalAmount">0</strong>
         </div>
+        <div class="horizontal-buttons">
+            <button id="dineInButton" onclick="selectOrderType('內用')">內用</button>
+            <button id="takeOutButton" onclick="selectOrderType('外帶')">外帶</button>
+        </div>
+        
         <button onclick="submitOrder()">提交訂單</button>
         <button onclick="goBackToMenu()">返回菜單</button>
     </div>
@@ -127,24 +132,28 @@
     <button class="floating-button" onclick="showCart()">🛒</button>
 
     <!-- 訂單明細 -->
-    <section id="orderSummaryPage" class="hidden">
+    <div id="orderSummaryPage" class="hidden">
         <h2>訂單明細</h2>
-        <table id="orderDetailsTable">
+        <table>
             <thead>
                 <tr>
-                    <th>菜品</th>
+                    <th>商品名稱</th>
                     <th>數量</th>
                     <th>大小</th>
                     <th>辣</th>
                     <th>香菜</th>
-                    <th>金額</th>
+                    <th>單項總金額</th>
                 </tr>
             </thead>
-            <tbody id="orderDetails"></tbody>
+            <tbody id="orderDetails">
+                <!-- 訂單明細會填充到這裡 -->
+            </tbody>
         </table>
         <div id="totalAmount"></div>
+        <div id="orderType"></div>
         <button onclick="goBackToMenu()">返回菜單</button>
-    </section>
+    </div>
+    
     
 
     <!-- javascritp連結 -->

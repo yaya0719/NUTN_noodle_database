@@ -157,5 +157,16 @@ section {
     text-align: center;
     margin-top: 20px;
 }
+.horizontal-buttons {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 居中对齐 */
+    gap: 10px; /* 按钮之间的间距 */
+    margin-top: 10px; /* 添加一些外边距 */
+}
+.horizontal-buttons button {
+    padding: 10px 20px; /* 调整按钮大小 */
+    font-size: 16px; /* 调整文字大小 */
+}
+
 
 

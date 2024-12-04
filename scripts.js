@@ -101,7 +101,6 @@ function addToCart() {
     goBackToMenu();
 }
 
-
 function showCart() {
     const cartPage = document.getElementById("cartPage");
     const cartItems = document.getElementById("cartItems");
@@ -134,10 +133,36 @@ function showCart() {
     cartPage.classList.remove("hidden");
 }
 
-//提交訂單並產生明細
+let selectedOrderType = ""; // 存储用户选择的内用或外带
+
+// 選擇內用或外帶
+function selectOrderType(type) {
+    selectedOrderType = type; // 设置选中的用餐方式
+    const dineInButton = document.getElementById("dineInButton");
+    const takeOutButton = document.getElementById("takeOutButton");
+
+    if (type === "內用") {
+        dineInButton.style.backgroundColor = "green";
+        dineInButton.style.color = "white";
+        takeOutButton.style.backgroundColor = "";
+        takeOutButton.style.color = "";
+    } else if (type === "外帶") {
+        takeOutButton.style.backgroundColor = "green";
+        takeOutButton.style.color = "white";
+        dineInButton.style.backgroundColor = "";
+        dineInButton.style.color = "";
+    }
+}
+
+// 提交订单并生成明细
 function submitOrder() {
     if (cart.length === 0) {
         alert("購物車是空的！");
+        return;
+    }
+
+    if (!selectedOrderType) {
+        alert("請選擇內用或外帶！");
         return;
     }
 
@@ -147,7 +172,7 @@ function submitOrder() {
     // 清空表格
     orderDetailsTable.innerHTML = "";
 
-    // 填充訂單明細到表格
+    // 填充订单明细到表格
     cart.forEach((item) => {
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -159,18 +184,20 @@ function submitOrder() {
             <td>${item.totalPrice} 元</td>
         `;
         orderDetailsTable.appendChild(row);
-        totalAmount += item.totalPrice; // 計算總金額
+        totalAmount += item.totalPrice; // 计算总金额
     });
 
-    // 顯示總金額
+    // 显示总金额和用餐方式
     document.getElementById("totalAmount").textContent = `總金額：${totalAmount} 元`;
+    document.getElementById("orderType").textContent = `用餐方式：${selectedOrderType}`;
 
-    // 隱藏其他頁面並顯示訂單明細頁
+    // 隐藏其他页面并显示订单明细页面
     document.getElementById("menuPage").classList.add("hidden");
     document.getElementById("cartPage").classList.add("hidden");
     document.getElementById("orderSummaryPage").classList.remove("hidden");
 
-    // 清空購物車
+    // 清空购物车和用餐方式
     cart = [];
+    selectedOrderType = ""; // 重置用餐方式
 }
 
