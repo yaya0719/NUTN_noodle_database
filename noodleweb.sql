@@ -1,8 +1,8 @@
-CREATE DATABASE noodledb;
+CREATE DATABASE noodledata;
 
 
 
-USE noodledb;
+USE noodledata;
 CREATE TABLE EMPLOYEE (
 
   name              VARCHAR(15)	    NOT NULL,
@@ -25,9 +25,9 @@ CREATE TABLE EMPLOYEE (
 
   phonenumber      INT,
   
-  sid              INT,
+  customerid              INT,
 
-  PRIMARY KEY (sid)
+  PRIMARY KEY (customerid)
 
 
 );
@@ -35,18 +35,18 @@ CREATE TABLE EMPLOYEE (
 
  CREATE TABLE orderr (
 
-  cuid              INT,
+  customerid        INT,
 
   ordtime           DATETIME,
   
   totalprice        INT,
 
-  oid               INT            NOT NULL,
+  orderid           INT            NOT NULL,
   
 
 
-  PRIMARY KEY (oid),
-  FOREIGN KEY (cuid) REFERENCES customer(sid)
+  PRIMARY KEY (orderid),
+  FOREIGN KEY (customerid) REFERENCES customer(customerid)
 
 );
 
@@ -67,11 +67,11 @@ CREATE TABLE 菜單 (
 
 CREATE TABLE orderinform (
 
-  ofid              INT	    NOT NULL,
+  ordeinfoid              INT	    NOT NULL,
 
   ordish            INT     NOT NULL,
 
-  ordernumber       INT,
+  phonenumber       INT,
   
   orderprice       INT,
 
@@ -79,9 +79,9 @@ CREATE TABLE orderinform (
   
 
 
-  PRIMARY KEY (ofid),
-  FOREIGN KEY (oid) REFERENCES orderr(oid),
-  FOREIGN KEY (ordish) REFERENCES 菜單(mid)
+  PRIMARY KEY (ordeinfoid),
+  FOREIGN KEY (oid) REFERENCES orderr(orderid)
+  
 
 );
 
@@ -218,5 +218,102 @@ INSERT INTO 菜單 VALUES
 
 ('燙青菜', NULL, 30,32);
 
+INSERT INTO EMPLOYEE VALUES
 
+('John',2002-10-02,'M',30000,12345678);
 
+INSERT INTO EMPLOYEE VALUES
+
+('lan',2003-11-22,'M',28000,11122233);
+
+INSERT INTO EMPLOYEE VALUES
+
+('Emma',2000-12-31,'F',31000,12312312);
+
+INSERT INTO EMPLOYEE VALUES
+
+('Molly',1999-07-03,'F',32000,22233344);
+
+INSERT INTO EMPLOYEE VALUES
+
+('Lydia',2001-01-01,'F',29000,44556677);
+
+INSERT INTO EMPLOYEE VALUES
+
+('Jason',1997-03-25,'M',33000,34556778);
+
+INSERT INTO EMPLOYEE VALUES
+
+('Aria',1998-10-16,'F',32500,32112345);
+
+INSERT INTO customer VALUES
+
+('James',3105550123,0001);
+
+INSERT INTO customer VALUES
+
+('Emily',4155550456,0002);
+
+INSERT INTO customer VALUES
+
+('Michael',2025550759,0003);
+
+INSERT INTO customer VALUES
+
+('Sarah',2125550934,0004);
+
+INSERT INTO customer VALUES
+
+('William',6465550182,0005);
+
+INSERT INTO orderr VALUES
+
+(0001,'2024-12-1 12:15:00',90,1);
+
+INSERT INTO orderr VALUES
+
+(0002,'2024-12-1 12:17:00',70,2);
+
+INSERT INTO orderr VALUES
+
+(0003,'2024-12-1 12:20:00',35,3);
+
+INSERT INTO orderr VALUES
+
+(0004,'2024-12-1 12:25:00',80,4);
+
+INSERT INTO orderr VALUES
+
+(0005,'2024-12-1 12:31:00',70,5);
+
+INSERT INTO orderinform VALUES
+
+(11111111,7,3105550123,35,1);
+
+INSERT INTO orderinform VALUES
+
+(11111112,3,4155550456,70,2);
+
+INSERT INTO orderinform VALUES
+
+(11111113,4,2025550789,35,3);
+
+INSERT INTO orderinform VALUES
+
+(11111114,15,2125550934,80,4);
+
+INSERT INTO orderinform VALUES
+
+(11111115,6,6465550182,70,5);
+
+INSERT INTO orderinform VALUES
+
+(11111116,10,3105550123,35,1);
+
+INSERT INTO orderinform VALUES
+
+(11111117,21,3105550123,10,1);
+
+INSERT INTO orderinform VALUES
+
+(11111118,29,3105550123,10,1);
