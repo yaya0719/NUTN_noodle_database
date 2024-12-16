@@ -1,319 +1,312 @@
-CREATE DATABASE noodledata;
-
-
-
-USE noodledata;
-CREATE TABLE EMPLOYEE (
-
-  name              VARCHAR(15)	    NOT NULL,
-
-  Bdate		          DATE,
-
-  Sex               CHAR,
-
-  Salary            DECIMAL(10,2),
-
-  sid               INT            NOT NULL,
-  
-  PRIMARY KEY (sid)
- 
-  );
-
-  CREATE TABLE customer (
-
-  name             VARCHAR(50)	    NOT NULL,
-
-  phonenumber      INT,
-  
-  customerid              INT,
-
-  PRIMARY KEY (customerid)
-
-
-);
-
-
- CREATE TABLE orderr (
-
-  customerid        INT,
-
-  ordtime           DATETIME,
-  
-  totalprice        INT,
-
-  orderid           INT            NOT NULL,
-  
-
-
-  PRIMARY KEY (orderid),
-  FOREIGN KEY (customerid) REFERENCES customer(customerid)
-
-);
-
-CREATE TABLE 菜單 (
-
-  name             VARCHAR(50)	    NOT NULL,
-
-  Size             VARCHAR(15),
-
-  price            INT,
-  
-  mid              INT       NOT NULL,
-
-  PRIMARY KEY (mid)
-
-
-);
-
-CREATE TABLE orderinform (
-
-  ordeinfoid              INT	    NOT NULL,
-
-  ordish            INT     NOT NULL,
-
-  phonenumber       INT,
-  
-  orderprice       INT,
-
-  oid               INT           NOT NULL,
-  
-
-
-  PRIMARY KEY (ordeinfoid),
-  FOREIGN KEY (oid) REFERENCES orderr(orderid)
-  
-
-);
-
-
-
-
-
-
-INSERT INTO 菜單 VALUES 
-
-('切仔麵', '小', 35,1); 
-
-INSERT INTO 菜單 VALUES 
-
-('切仔麵', '中', 45,2);
-
-INSERT INTO 菜單 VALUES 
-
-('切仔麵', '大', 70,3);
-
-INSERT INTO 菜單 VALUES 
-
-('米粉', '小', 35,4);
-
-INSERT INTO 菜單 VALUES 
-
-('米粉', '中', 45,5);
-
-INSERT INTO 菜單 VALUES 
-
-('米粉', '大', 70,6);
-
-INSERT INTO 菜單 VALUES 
-
-('粄條', '小', 35,7);
-
-INSERT INTO 菜單 VALUES 
-
-('粄條', '中', 45,8);
-
-INSERT INTO 菜單 VALUES 
-
-('粄條', '大', 70,9);
-
-INSERT INTO 菜單 VALUES 
-
-('米苔目', '小', 35,10);
-
-INSERT INTO 菜單 VALUES 
-
-('米苔目', '中', 45,11);
-
-INSERT INTO 菜單 VALUES 
-
-('米苔目', '大', 70,12);
-
-INSERT INTO 菜單 VALUES 
-
-('凸皮麵', '小', 45,13);
-
-INSERT INTO 菜單 VALUES 
-
-('凸皮麵', '中', 55,14);
-
-INSERT INTO 菜單 VALUES 
-
-('凸皮麵', '大', 80,15);
-
-INSERT INTO 菜單 VALUES 
-
-('蚵仔麵', '小', 65,16);
-
-INSERT INTO 菜單 VALUES 
-
-('蚵仔麵', '中', 75,17);
-
-INSERT INTO 菜單 VALUES 
-
-('蚵仔麵', '大', 100,18);
-
-INSERT INTO 菜單 VALUES 
-
-('肉燥飯', '小', 35,19);
-
-INSERT INTO 菜單 VALUES 
-
-('肉燥飯', '大', 45,20);
-
-INSERT INTO 菜單 VALUES 
-
-('豆腐湯', NULL, 10,21);
-
-INSERT INTO 菜單 VALUES 
-
-('凸皮湯', NULL, 10,22);
-
-INSERT INTO 菜單 VALUES 
-
-('貢丸湯', NULL, 20,23);
-
-INSERT INTO 菜單 VALUES 
-
-('粉腸湯', NULL, 30,24);
-
-INSERT INTO 菜單 VALUES 
-
-('肉湯', NULL, 10,25);
-
-INSERT INTO 菜單 VALUES 
-
-('蚵仔湯', NULL, 50,26);
-
-INSERT INTO 菜單 VALUES 
-
-('肉類', '小', 30,27);
-
-INSERT INTO 菜單 VALUES 
-
-('肉類', '大', 50,28);
-
-INSERT INTO 菜單 VALUES 
-
-('滷豆腐', NULL, 10,29);
-
-INSERT INTO 菜單 VALUES 
-
-('油豆腐', NULL, 5,30);
-
-INSERT INTO 菜單 VALUES 
-
-('滷蛋', NULL, 15,31);
-
-INSERT INTO 菜單 VALUES 
-
-('燙青菜', NULL, 30,32);
-
-INSERT INTO EMPLOYEE VALUES
-
-('John',2002-10-02,'M',30000,12345678);
-
-INSERT INTO EMPLOYEE VALUES
-
-('lan',2003-11-22,'M',28000,11122233);
-
-INSERT INTO EMPLOYEE VALUES
-
-('Emma',2000-12-31,'F',31000,12312312);
-
-INSERT INTO EMPLOYEE VALUES
-
-('Molly',1999-07-03,'F',32000,22233344);
-
-INSERT INTO EMPLOYEE VALUES
-
-('Lydia',2001-01-01,'F',29000,44556677);
-
-INSERT INTO EMPLOYEE VALUES
-
-('Jason',1997-03-25,'M',33000,34556778);
-
-INSERT INTO EMPLOYEE VALUES
-
-('Aria',1998-10-16,'F',32500,32112345);
-
-INSERT INTO customer VALUES
-
-('James',3105550123,0001);
-
-INSERT INTO customer VALUES
-
-('Emily',4155550456,0002);
-
-INSERT INTO customer VALUES
-
-('Michael',2025550759,0003);
-
-INSERT INTO customer VALUES
-
-('Sarah',2125550934,0004);
-
-INSERT INTO customer VALUES
-
-('William',6465550182,0005);
-
-INSERT INTO orderr VALUES
-
-(0001,'2024-12-1 12:15:00',90,1);
-
-INSERT INTO orderr VALUES
-
-(0002,'2024-12-1 12:17:00',70,2);
-
-INSERT INTO orderr VALUES
-
-(0003,'2024-12-1 12:20:00',35,3);
-
-INSERT INTO orderr VALUES
-
-(0004,'2024-12-1 12:25:00',80,4);
-
-INSERT INTO orderr VALUES
-
-(0005,'2024-12-1 12:31:00',70,5);
-
-INSERT INTO orderinform VALUES
-
-(11111111,7,3105550123,35,1);
-
-INSERT INTO orderinform VALUES
-
-(11111112,3,4155550456,70,2);
-
-INSERT INTO orderinform VALUES
-
-(11111113,4,2025550789,35,3);
-
-INSERT INTO orderinform VALUES
-
-(11111114,15,2125550934,80,4);
-
-INSERT INTO orderinform VALUES
-
-(11111115,6,6465550182,70,5);
-
-INSERT INTO orderinform VALUES
-
-(11111116,10,3105550123,35,1);
-
-INSERT INTO orderinform VALUES
-
-(11111117,21,3105550123,10,1);
-
-INSERT INTO orderinform VALUES
-
-(11111118,29,3105550123,10,1);
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- 主機： 127.0.0.1
+-- 產生時間： 2024-12-16 16:43:27
+-- 伺服器版本： 10.4.32-MariaDB
+-- PHP 版本： 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- 資料庫： `noodledata`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `customer`
+--
+
+CREATE TABLE `customer` (
+  `name` varchar(50) NOT NULL,
+  `phonenumber` int(11) DEFAULT NULL,
+  `customerid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `customer`
+--
+
+INSERT INTO `customer` (`name`, `phonenumber`, `customerid`) VALUES
+('James', 2147483647, 1),
+('Emily', 2147483647, 2),
+('Michael', 2025550759, 3),
+('Sarah', 2125550934, 4),
+('William', 2147483647, 5);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `employee`
+--
+
+CREATE TABLE `employee` (
+  `name` varchar(15) NOT NULL,
+  `Bdate` date DEFAULT NULL,
+  `Sex` char(1) DEFAULT NULL,
+  `Salary` decimal(10,2) DEFAULT NULL,
+  `sid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `employee`
+--
+
+INSERT INTO `employee` (`name`, `Bdate`, `Sex`, `Salary`, `sid`) VALUES
+('lan', '0000-00-00', 'M', 28000.00, 11122233),
+('Emma', '0000-00-00', 'F', 31000.00, 12312312),
+('John', '0000-00-00', 'M', 30000.00, 12345678),
+('Molly', '0000-00-00', 'F', 32000.00, 22233344),
+('Aria', '0000-00-00', 'F', 32500.00, 32112345),
+('Jason', '0000-00-00', 'M', 33000.00, 34556778),
+('Lydia', '0000-00-00', 'F', 29000.00, 44556677);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `orderinform`
+--
+
+CREATE TABLE `orderinform` (
+  `ordeinfoid` int(11) NOT NULL,
+  `ordish` text NOT NULL,
+  `phonenumber` int(11) DEFAULT NULL,
+  `orderprice` int(11) DEFAULT NULL,
+  `oid` int(11) NOT NULL,
+  `spicy` text DEFAULT NULL,
+  `coriander` text DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `size` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `orderinform`
+--
+
+INSERT INTO `orderinform` (`ordeinfoid`, `ordish`, `phonenumber`, `orderprice`, `oid`, `spicy`, `coriander`, `quantity`, `size`) VALUES
+(1, '7', 2147483647, 35, 1, NULL, NULL, NULL, NULL),
+(2, '3', 2147483647, 70, 2, NULL, NULL, NULL, NULL),
+(3, '4', 2025550789, 35, 3, NULL, NULL, NULL, NULL),
+(4, '15', 2125550934, 80, 4, NULL, NULL, NULL, NULL),
+(5, '6', 2147483647, 70, 5, NULL, NULL, NULL, NULL),
+(6, '10', 2147483647, 35, 1, NULL, NULL, NULL, NULL),
+(7, '21', 2147483647, 10, 1, NULL, NULL, NULL, NULL),
+(8, '29', 2147483647, 10, 1, NULL, NULL, NULL, NULL),
+(9, '1', 1234567890, 35, 15, NULL, NULL, NULL, NULL),
+(10, '1', 1234567890, 45, 15, NULL, NULL, NULL, NULL),
+(11, '0', 1234567890, 35, 16, NULL, NULL, NULL, NULL),
+(12, '0', 1234567890, 10, 16, NULL, NULL, NULL, NULL),
+(13, '0', 1234567890, 35, 17, NULL, NULL, NULL, NULL),
+(14, '0', 1234567890, 30, 17, NULL, NULL, NULL, NULL),
+(15, '0', 1234567890, 35, 18, NULL, NULL, NULL, NULL),
+(16, '0', 1234567890, 15, 18, NULL, NULL, NULL, NULL),
+(17, '10', 1234567890, 35, 19, NULL, NULL, NULL, NULL),
+(18, '0', 1234567890, 10, 19, NULL, NULL, NULL, NULL),
+(19, '10', 1234567890, 35, 20, NULL, NULL, NULL, NULL),
+(20, '0', 1234567890, 30, 20, NULL, NULL, NULL, NULL),
+(21, '0', 1234567890, 35, 21, NULL, NULL, NULL, NULL),
+(22, '31', 1234567890, 15, 21, NULL, NULL, NULL, NULL),
+(23, '10', 1234567890, 35, 22, NULL, NULL, NULL, NULL),
+(24, '31', 1234567890, 15, 22, NULL, NULL, NULL, NULL),
+(25, '4', 1234567890, 70, 23, '', '', 2, NULL),
+(26, '16', 1234567890, 130, 26, '是', '是', 2, NULL),
+(27, '13', 1234567890, 45, 27, '否', '否', 1, NULL),
+(28, '4', 1234567890, 70, 28, '否', '是', 2, NULL),
+(29, '17', 1234567890, 225, 28, '是', '否', 3, NULL),
+(30, '31', 1234567890, 30, 32, '否', '否', 2, NULL),
+(31, '板條', 1234567890, 70, 38, '否', '是', 2, NULL),
+(32, '滷蛋', 1234567890, 30, 38, '否', '否', 2, NULL),
+(33, '板條', 1234567890, 70, 39, '否', '是', 2, '小'),
+(34, '滷蛋', 1234567890, 45, 39, '是', '是', 3, '');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `orderr`
+--
+
+CREATE TABLE `orderr` (
+  `customerid` int(11) DEFAULT NULL,
+  `ordtime` datetime DEFAULT NULL,
+  `totalprice` int(11) DEFAULT NULL,
+  `orderid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `orderr`
+--
+
+INSERT INTO `orderr` (`customerid`, `ordtime`, `totalprice`, `orderid`) VALUES
+(1, '2024-12-01 12:15:00', 90, 1),
+(2, '2024-12-01 12:17:00', 70, 2),
+(3, '2024-12-01 12:20:00', 35, 3),
+(4, '2024-12-01 12:25:00', 80, 4),
+(5, '2024-12-01 12:31:00', 70, 5),
+(5, '2024-11-12 07:55:32', 0, 6),
+(5, '2024-11-12 08:03:23', 0, 7),
+(5, '2024-11-12 08:33:00', 70, 8),
+(5, '2024-11-12 10:10:43', 45, 9),
+(5, '2024-11-12 10:13:03', 35, 10),
+(5, '2024-11-12 10:14:04', 0, 11),
+(5, '2024-11-12 10:14:10', 35, 12),
+(5, '2024-11-12 10:22:34', 80, 13),
+(5, '2024-11-12 10:24:27', 80, 14),
+(5, '2024-11-12 10:28:44', 80, 15),
+(5, '2024-11-12 10:34:21', 45, 16),
+(5, '2024-11-12 10:36:01', 65, 17),
+(5, '2024-11-12 10:37:15', 50, 18),
+(5, '2024-11-12 10:40:06', 45, 19),
+(5, '2024-11-12 10:42:56', 65, 20),
+(5, '2024-11-12 10:44:48', 50, 21),
+(5, '2024-11-12 10:46:19', 50, 22),
+(5, '0000-00-00 00:00:00', 70, 23),
+(5, '0000-00-00 00:00:00', 70, 24),
+(5, '0000-00-00 00:00:00', 105, 25),
+(5, '0000-00-00 00:00:00', 130, 26),
+(5, '0000-00-00 00:00:00', 75, 27),
+(5, '0000-00-00 00:00:00', 295, 28),
+(5, '0000-00-00 00:00:00', 55, 29),
+(5, '0000-00-00 00:00:00', 0, 30),
+(5, '0000-00-00 00:00:00', 85, 31),
+(5, '0000-00-00 00:00:00', 100, 32),
+(5, '0000-00-00 00:00:00', 120, 33),
+(5, '0000-00-00 00:00:00', 120, 34),
+(5, '0000-00-00 00:00:00', 100, 35),
+(5, '0000-00-00 00:00:00', 220, 36),
+(5, '0000-00-00 00:00:00', 115, 37),
+(5, '0000-00-00 00:00:00', 100, 38),
+(5, '0000-00-00 00:00:00', 115, 39);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `菜單`
+--
+
+CREATE TABLE `菜單` (
+  `name` varchar(50) NOT NULL,
+  `Size` varchar(15) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `mid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `菜單`
+--
+
+INSERT INTO `菜單` (`name`, `Size`, `price`, `mid`) VALUES
+('切仔麵', '小', 35, 1),
+('切仔麵', '中', 45, 2),
+('切仔麵', '大', 70, 3),
+('米粉', '小', 35, 4),
+('米粉', '中', 45, 5),
+('米粉', '大', 70, 6),
+('粄條', '小', 35, 7),
+('粄條', '中', 45, 8),
+('粄條', '大', 70, 9),
+('米苔目', '小', 35, 10),
+('米苔目', '中', 45, 11),
+('米苔目', '大', 70, 12),
+('凸皮麵', '小', 45, 13),
+('凸皮麵', '中', 55, 14),
+('凸皮麵', '大', 80, 15),
+('蚵仔麵', '小', 65, 16),
+('蚵仔麵', '中', 75, 17),
+('蚵仔麵', '大', 100, 18),
+('肉燥飯', '小', 35, 19),
+('肉燥飯', '大', 45, 20),
+('豆腐湯', NULL, 10, 21),
+('凸皮湯', NULL, 10, 22),
+('貢丸湯', NULL, 20, 23),
+('粉腸湯', NULL, 30, 24),
+('肉湯', NULL, 10, 25),
+('蚵仔湯', NULL, 50, 26),
+('肉類', '小', 30, 27),
+('肉類', '大', 50, 28),
+('滷豆腐', NULL, 10, 29),
+('油豆腐', NULL, 5, 30),
+('滷蛋', NULL, 15, 31),
+('燙青菜', NULL, 30, 32);
+
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`customerid`);
+
+--
+-- 資料表索引 `employee`
+--
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`sid`);
+
+--
+-- 資料表索引 `orderinform`
+--
+ALTER TABLE `orderinform`
+  ADD PRIMARY KEY (`ordeinfoid`),
+  ADD KEY `oid` (`oid`);
+
+--
+-- 資料表索引 `orderr`
+--
+ALTER TABLE `orderr`
+  ADD PRIMARY KEY (`orderid`),
+  ADD KEY `customerid` (`customerid`);
+
+--
+-- 資料表索引 `菜單`
+--
+ALTER TABLE `菜單`
+  ADD PRIMARY KEY (`mid`);
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `orderinform`
+--
+ALTER TABLE `orderinform`
+  MODIFY `ordeinfoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `orderr`
+--
+ALTER TABLE `orderr`
+  MODIFY `orderid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- 已傾印資料表的限制式
+--
+
+--
+-- 資料表的限制式 `orderinform`
+--
+ALTER TABLE `orderinform`
+  ADD CONSTRAINT `orderinform_ibfk_1` FOREIGN KEY (`oid`) REFERENCES `orderr` (`orderid`);
+
+--
+-- 資料表的限制式 `orderr`
+--
+ALTER TABLE `orderr`
+  ADD CONSTRAINT `orderr_ibfk_1` FOREIGN KEY (`customerid`) REFERENCES `customer` (`customerid`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
