@@ -14,15 +14,15 @@ $menuPrices = [
     "凸皮麵" => ["小" => 45, "中" => 55, "大" => 80],
     "蚵仔麵" => ["小" => 65, "中" => 75, "大" => 100],
     "肉燥飯" => ["小" => 35, "大" => 45],
-    "豆腐湯" => ["NULL" => 10],
-    "凸皮湯" => ["NULL" => 10],
-    "貢丸湯" => ["NULL" => 20],
-    "粉腸湯" => ["NULL" => 30],
-    "肉湯" => ["NULL" => 10],
+    "豆腐湯" => [ NULL => 10],
+    "凸皮湯" => [ NULL => 10],
+    "貢丸湯" => [ NULL => 20],
+    "粉腸湯" => [NULL => 30],
+    "肉湯" => [NULL => 10],
     "肉類" => ["小" => 30, "大" => 50],
-    "油豆腐" => ["NULL" => 10],
-    "滷蛋" => ["NULL" => 15],
-    "燙青菜" => ["NULL" => 30]
+    "油豆腐" => [NULL => 10],
+    "滷蛋" => [NULL => 15],
+    "燙青菜" => [NULL => 30]
 ];
 
 // 初始化購物車
@@ -77,7 +77,7 @@ if (isset($_POST['clearCart'])) {
 // 提交訂單後清空購物車
 if (isset($_POST['submitOrder'])) {
     
-   
+    
     $totalAmount = 0;
     foreach ($_SESSION['cart'] as $item) {
         $totalAmount += $item['totalPrice'];
@@ -109,12 +109,15 @@ if (isset($_POST['submitOrder'])) {
     foreach ($_SESSION['cart'] as $cartItem) {
         $itemName = $cartItem['name'];
         $quantity = $cartItem['quantity'];
+        $spicy = $cartItem['spicy'];
+        $coriander = $cartItem['coriander'];
         $size = $cartItem['size'];
         $price = $cartItem['price'];
         $totalPrice = $cartItem['totalPrice'];
         $datas = array();
+        $pp=$price / $quantity;
 // sql語法存在變數中
-        $sql = "SELECT `mid` FROM `菜單` AS userData WHERE `name`= '$itemName' and `price`= '$price'";
+       /* $sql = "SELECT `mid` FROM `菜單` AS userData WHERE `name`= '$itemName' and `price`= '$price' ";
 
 
         $result = mysqli_query($link,$sql);
@@ -137,12 +140,12 @@ if (isset($_POST['submitOrder'])) {
         } else {
             echo "未能找到對應的 mid";
             continue; // 跳過該迴圈
-        }
+        }*/
         
         // 假設 `ordish` 是商品的數量，`phonenumber` 可以是預設值或來自客戶資料
         $phoneNumber = '1234567890'; // 假設為測試用電話號碼
-        $sqlOrderInform = "INSERT INTO `orderinform` ( `ordish`, `phonenumber`, `orderprice`, `oid`) 
-                           VALUES ('$ordish', '$phoneNumber', '$totalPrice', '$orderId')";
+        $sqlOrderInform = "INSERT INTO `orderinform` ( `ordish`, `phonenumber`, `orderprice`, `oid`,`spicy`,`coriander`,`quantity`,`size`) 
+                           VALUES ('$itemName', '$phoneNumber', '$totalPrice', '$orderId','$spicy','$coriander','$quantity','$size')";
         mysqli_query($link, $sqlOrderInform);
     }
 
@@ -165,140 +168,7 @@ if (isset($_POST['viewCart'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>點餐系統 - 麵飯類</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar {
-            background-color: #333;
-            text-align: center;
-            padding: 10px;
-        }
-        .navbar a {
-            display: inline-block;
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2 {
-            text-align: center;
-        }
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-        .total {
-            text-align: right;
-            margin-top: 20px;
-            font-size: 18px;
-        }
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #9dd8f0;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        section {
-            margin-bottom: 40px;
-        }
-        .hidden {
-            display: none;
-        }
-        .menu-items {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .menu-item {
-            background-color: #f4f4f4;
-            border: 1px solid #ddd;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 18px;
-        }
-        .menu-item:hover {
-            background-color: #ddd;
-        }
-        .item-details {
-            margin-top: 20px;
-        }
-        .back-button {
-            margin-top: 20px;
-            display: inline-block;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .back-button:hover {
-            background-color: #0056b3;
-        }
-        #itemDetailsPage, #cartPage {
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .floating-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            font-size: 24px;
-            transition: background-color 0.3s;
-        }
-        .floating-button:hover {
-            background-color: #218838;
-        }
-        .quantity-input {
-            width: 50px;
-            text-align: center;
-        }
-    </style>
+    
 </head>
 <body>
     <h1>麵攤點餐系統</h1>
@@ -308,11 +178,11 @@ if (isset($_POST['viewCart'])) {
         <form method="POST">
             <input type="hidden" name="page" value="menuPage">
             <div class="navbar">
-                <button name="category" value="mainCourse">主食</button>
-                <button name="category" value="soups">湯品</button>
-                <button name="category" value="sideDishes">小菜</button>
-                <button name="viewCart" value="1">查看購物車</button>
+            <button class="box1" name="category" value="mainCourse">主食</button>
+            <button class="box2" name="category" value="soups">湯品</button>
+            <button class="box3" name="category" value="sideDishes">小菜</button>
             </div>
+            <button class="floating-button" name="viewCart" value="1">🛒</button>
         </form>
         
         <div class="container">
@@ -322,10 +192,10 @@ if (isset($_POST['viewCart'])) {
                 <input type="hidden" name="category" value="<?= $selectedCategory ?>">
                 <div class="menu-items">
                     <?php foreach ($menuPrices as $itemName => $prices): ?>
-                        <?php if (($selectedCategory === 'mainCourse' && in_array($itemName, ['切仔麵', '米粉', '板條', '米苔目', '凸皮麵', '蚵仔麵', '肉燥飯']))
+                        <?php if (($selectedCategory === 'mainCourse' && in_array($itemName, ['切仔麵', '米粉', '板條', '米苔目', '凸皮麵', '蚵仔麵', '肉燥飯'] ))
                             || ($selectedCategory === 'soups' && in_array($itemName, ['豆腐湯', '凸皮湯', '貢丸湯', '粉腸湯', '肉湯']))
                             || ($selectedCategory === 'sideDishes' && in_array($itemName, ['肉類', '滷豆腐', '油豆腐', '滷蛋', '燙青菜']))): ?>
-                            <button name="item" value="<?= $itemName ?>"><?= $itemName ?></button>
+                            <button class="menu-item" name="item" value="<?= $itemName ?>"><?= $itemName ?></button>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
@@ -435,4 +305,5 @@ if (isset($_POST['viewCart'])) {
     <?php endif; ?>
 </body>
 </html>
+
 
