@@ -2,7 +2,7 @@
 session_start();
 require_once 'db.php';
 $cid=5;
-
+global $new_id;
 
 
 // 初始化菜單價格
@@ -97,7 +97,6 @@ if (isset($_POST['submitOrder'])) {
     // mysqli_insert_id可以抓到第一筆的id
     $orderId = mysqli_insert_id($link); // 獲取插入的訂單 ID
     $new_id= mysqli_insert_id ($link);
-    echo "新增後的id為 {$new_id} ";
     }   
     elseif(mysqli_affected_rows($link)==0) {
         echo "無資料新增";
@@ -283,19 +282,15 @@ if (isset($_POST['viewCart'])) {
             <h2>感謝訂購</h2>
             <table>
             <thead>
-                    
-                    </thead>
-                <tbody>
-                    <?php
-                    $totalAmount = 0;
-                    foreach ($_SESSION['cart'] as $item):
-                        $totalAmount += $item['totalPrice'];
-
-                    ?>
-                     
-                        
-                    <?php endforeach; ?>
-                </tbody>
+            <tr>
+                <th>取餐編號</th>
+            </tr>       
+            </thead>
+            <tbody>
+                <tr>
+                    <td><?=$new_id ?></td>
+                </tr>
+            </tbody>
             </table>
             
             <form method="POST">
@@ -305,5 +300,3 @@ if (isset($_POST['viewCart'])) {
     <?php endif; ?>
 </body>
 </html>
-
-
