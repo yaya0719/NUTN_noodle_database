@@ -10,7 +10,6 @@
 |----------------------|--------------------------------|
 | `frontend_noodle.php`| 前端網頁，點餐功能介面         |
 | `frontend_noodle.css`| 前端網頁樣式表                 |
-| `nbbbb.php`          | 前端點餐邏輯與處理             |
 | `noodledata.sql`     | 資料庫設定檔案                 |
 | `backend_noodle.php` | 後端資料管理頁面               |
 | `backend_noodle.css` | 後端樣式設定                   |
