@@ -1,0 +1,107 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+h1, h2 {
+    margin: 20px 0;
+    color: #333;
+}
+
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.navbar a:hover {
+    background-color: #575757;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+    gap: 10px; /* 控制表單欄位間的間距 */
+}
+
+form input, form button {
+    padding: 5px;
+    font-size: 14px;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto; /* 表格置中 */
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #007BFF; /* 藍色標頭 */
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: red;
+}
+/* 美化按鈕 */
+form button, button {
+    background-color: #007BFF; /* 藍色背景 */
+    color: white; /* 文字顏色 */
+    border: none; /* 去除邊框 */
+    padding: 8px 15px; /* 內邊距 */
+    font-size: 14px; /* 字體大小 */
+    border-radius: 5px; /* 圓角 */
+    cursor: pointer; /* 滑鼠變小手 */
+    transition: background-color 0.3s ease; /* 平滑變化 */
+}
+
+form button:hover, button:hover {
+    background-color: #0056b3; /* 深藍色背景 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* 加上陰影 */
+}
+
+/* 美化輸入框 */
+form input {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 14px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+form input:focus {
+    border-color: #007BFF;
+}
+

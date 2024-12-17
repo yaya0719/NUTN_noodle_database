@@ -135,7 +135,7 @@ function showCart() {
 
 let selectedOrderType = ""; // 存储用户选择的内用或外带
 
-// 選擇內用或外帶
+// 選擇內用或外帶，購物車按鈕按下去時候觸發
 function selectOrderType(type) {
     selectedOrderType = type; // 设置选中的用餐方式
     const dineInButton = document.getElementById("dineInButton");
