@@ -8,17 +8,49 @@ body {
     background-color: #333;
     text-align: center;
     padding: 10px;
-}
-.navbar a {
     display: inline-block;
+   
+}
+.box1 {
+    height: 60px;
+    width: 490px;
+    text-decoration: none;
+    font-size: 18px;
+    background-color: #333;
+    float: left;
+ }
+ .box2 {
+    height: 60px;
+    width: 490px;
+    text-decoration: none;
+    font-size: 18px;
+    background-color: #333;
+    float: left;
+ }
+ .box3 {
+    height: 60px;
+    width: 490px;
+    text-decoration: none;
+    font-size: 18px;
+    background-color: #333;
+    float: left;
+ }
+
+
+.narr {
+    
+    background-color: #333;
     color: white;
     padding: 14px 20px;
     text-decoration: none;
     font-size: 18px;
+    float: left;
+    
 }
-.navbar a:hover {
+.narr:hover {
     background-color: #ddd;
     color: black;
+    
 }
 .container {
     max-width: 800px;
@@ -72,8 +104,8 @@ section {
     gap: 10px;
 }
 .menu-item {
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
+    background-color: #2f2d2d;
+    border: 1px solid #d5d1d1;
     padding: 15px;
     text-align: center;
     cursor: pointer;
@@ -167,6 +199,5 @@ section {
     padding: 10px 20px; /* 调整按钮大小 */
     font-size: 16px; /* 调整文字大小 */
 }
-
 
 
