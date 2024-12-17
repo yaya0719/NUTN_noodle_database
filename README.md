@@ -1,1 +1,6 @@
 國立台南大學大三上資料庫的期末專題
+noodleweb.html和styles.css為舊版網頁，未與資料庫連結
+nbbbb.php為前端網頁提供顧客點餐，並把訂單回傳到資料庫
+noodleweb.sql為麵店管理系統資料庫
+noodle_display.php和noodle_display.css為後端網頁供老闆看訂單資訊與管理菜單和員工
+dp.php是網頁與資料庫做連結的檔案
