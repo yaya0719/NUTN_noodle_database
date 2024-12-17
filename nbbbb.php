@@ -191,12 +191,36 @@ if (isset($_POST['viewCart'])) {
                 <input type="hidden" name="page" value="itemDetailsPage">
                 <input type="hidden" name="category" value="<?= $selectedCategory ?>">
                 <div class="menu-items">
-                    <?php foreach ($menuPrices as $itemName => $prices): ?>
-                        <?php if (($selectedCategory === 'mainCourse' && in_array($itemName, ['切仔麵', '米粉', '板條', '米苔目', '凸皮麵', '蚵仔麵', '肉燥飯'] ))
-                            || ($selectedCategory === 'soups' && in_array($itemName, ['豆腐湯', '凸皮湯', '貢丸湯', '粉腸湯', '肉湯']))
-                            || ($selectedCategory === 'sideDishes' && in_array($itemName, ['肉類', '滷豆腐', '油豆腐', '滷蛋', '燙青菜']))): ?>
+                    <?php
+                    if($selectedCategory === 'mainCourse'){$dishtype="maindish";}
+                    elseif ($selectedCategory === 'soups') {$dishtype="soups";}
+                    else {$dishtype="seidDishes";}
+                    
+                    $sql = "SELECT `name` FROM `菜單` AS userData WHERE `type`= '$dishtype' and (`Size`= '小' or `Size`= '不分') ";
+
+
+                    $result = mysqli_query($link,$sql);
+            
+                    if ($result) {
+              
+                        if (mysqli_num_rows($result)>0) {
+                    
+                            while ($row = mysqli_fetch_assoc($result)) {
+                       
+                             $datas[] = $row;
+                            }
+                        }
+                        mysqli_free_result($result);
+               
+                    }
+                   
+                    
+                    foreach ($datas as $row): 
+                        $itemName = $row['name']; 
+                     ?>
+                        
                             <button class="menu-item" name="item" value="<?= $itemName ?>"><?= $itemName ?></button>
-                        <?php endif; ?>
+                       
                     <?php endforeach; ?>
                 </div>
             </form>
