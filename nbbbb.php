@@ -84,7 +84,8 @@ if (isset($_POST['submitOrder'])) {
     }
 
     // 獲取訂單時間
-    $DateAndTime = date('Y-d-m h:i:s', time());
+    date_default_timezone_set('Asia/Taipei');
+    $DateAndTime = date('Y-m-d h:i:s', time());
 
     // 使用資料庫的自增 ID
     $sql = "INSERT INTO `orderr` (`customerid`, `ordtime`, `totalprice`) VALUES ('$cid', '$DateAndTime', '$totalAmount')";
@@ -300,3 +301,4 @@ if (isset($_POST['viewCart'])) {
     <?php endif; ?>
 </body>
 </html>
+
