@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'db.php';
-$cid=5;
+
 global $new_id;
 
 
@@ -20,6 +20,7 @@ $menuPrices = [
     "粉腸湯" => [NULL => 30],
     "肉湯" => [NULL => 10],
     "肉類" => ["小" => 30, "大" => 50],
+    "滷豆腐" => [NULL => 10],
     "油豆腐" => [NULL => 10],
     "滷蛋" => [NULL => 15],
     "燙青菜" => [NULL => 30]
@@ -77,7 +78,8 @@ if (isset($_POST['clearCart'])) {
 // 提交訂單後清空購物車
 if (isset($_POST['submitOrder'])) {
     
-    
+    $customerName = $_POST['customerName'];
+    $customerPhone = $_POST['customerPhone'];
     $totalAmount = 0;
     foreach ($_SESSION['cart'] as $item) {
         $totalAmount += $item['totalPrice'];
@@ -86,6 +88,42 @@ if (isset($_POST['submitOrder'])) {
     // 獲取訂單時間
     date_default_timezone_set('Asia/Taipei');
     $DateAndTime = date('Y-m-d h:i:s', time());
+
+    $sql = "INSERT INTO `customer` (`name`, `phonenumber`) VALUES ('$customerName', '$customerPhone')";
+
+    $result = mysqli_query($link,$sql);
+
+    // 如果有異動到資料庫數量(更新資料庫)
+    if (mysqli_affected_rows($link)>0) {
+    // 如果有一筆以上代表有更新
+    // mysqli_insert_id可以抓到第一筆的id
+    
+    
+    }   
+    elseif(mysqli_affected_rows($link)==0) {
+        echo "無資料新增";
+    }
+    else {
+        echo "{$sql} 語法執行失敗，錯誤訊息: " . mysqli_error($link);
+    }
+    $sql = "SELECT `customerid` FROM `customer` AS userData WHERE `name`= '$customerName' and `phonenumber`= '$customerPhone'   ";
+
+
+                    $result = mysqli_query($link,$sql);
+            
+                    if ($result) {
+              
+                        if (mysqli_num_rows($result)>0) {
+                    
+                            while ($row = mysqli_fetch_assoc($result)) {
+                       
+                             $datas[] = $row;
+                            }
+                        }
+                        mysqli_free_result($result);
+               
+                    }
+    $cid=$datas[0]['customerid'];
 
     // 使用資料庫的自增 ID
     $sql = "INSERT INTO `orderr` (`customerid`, `ordtime`, `totalprice`) VALUES ('$cid', '$DateAndTime', '$totalAmount')";
@@ -105,6 +143,7 @@ if (isset($_POST['submitOrder'])) {
     else {
         echo "{$sql} 語法執行失敗，錯誤訊息: " . mysqli_error($link);
     }
+    
     
     foreach ($_SESSION['cart'] as $cartItem) {
         $itemName = $cartItem['name'];
@@ -145,7 +184,7 @@ if (isset($_POST['submitOrder'])) {
         // 假設 `ordish` 是商品的數量，`phonenumber` 可以是預設值或來自客戶資料
         $phoneNumber = '1234567890'; // 假設為測試用電話號碼
         $sqlOrderInform = "INSERT INTO `orderinform` ( `ordish`, `phonenumber`, `orderprice`, `oid`,`spicy`,`coriander`,`quantity`,`size`) 
-                           VALUES ('$itemName', '$phoneNumber', '$totalPrice', '$orderId','$spicy','$coriander','$quantity','$size')";
+                           VALUES ('$itemName', '$customerPhone', '$totalPrice', '$orderId','$spicy','$coriander','$quantity','$size')";
         mysqli_query($link, $sqlOrderInform);
     }
 
@@ -267,45 +306,64 @@ if (isset($_POST['viewCart'])) {
     <?php endif; ?>
 
     <!-- 顯示購物車 -->
-    <?php if ($page === 'cartPage'): ?>
-        <div class="container">
-            <h2>購物車</h2>
-            <form method="POST">
-                <table>
-                    <thead>
+<?php if ($page === 'cartPage'): ?>
+    <div class="container">
+        <h2>購物車</h2>
+        
+       
+
+        
+
+        <form method="POST">
+            <!-- 顧客姓名與電話輸入 -->
+        <div class="customer-info">
+                <label for="customerName">姓名：</label>
+                <input type="text" id="customerName" name="customerName" required placeholder="請輸入您的姓名">
+                
+                <label for="customerPhone">電話號碼：</label>
+                <input type="tel" id="customerPhone" name="customerPhone" required placeholder="請輸入您的電話號碼">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>商品名稱</th>
+                        <th>數量</th>
+                        <th>大小</th>
+                        <th>辣</th>
+                        <th>香菜</th>
+                        <th>單項總金額</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $totalAmount = 0; ?>
+                    <?php foreach ($_SESSION['cart'] as $item): ?>
                         <tr>
-                            <th>商品名稱</th>
-                            <th>數量</th>
-                            <th>大小</th>
-                            <th>辣</th>
-                            <th>香菜</th>
-                            <th>單項總金額</th>
+                            <td><?= $item['name'] ?></td>
+                            <td><?= $item['quantity'] ?></td>
+                            <td><?= $item['size'] ?></td>
+                            <td><?= $item['spicy'] ?></td>
+                            <td><?= $item['coriander'] ?></td>
+                            <td><?= $item['totalPrice'] ?> 元</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php $totalAmount = 0; ?>
-                        <?php foreach ($_SESSION['cart'] as $item): ?>
-                            <tr>
-                                <td><?= $item['name'] ?></td>
-                                <td><?= $item['quantity'] ?></td>
-                                <td><?= $item['size'] ?></td>
-                                <td><?= $item['spicy'] ?></td>
-                                <td><?= $item['coriander'] ?></td>
-                                <td><?= $item['totalPrice'] ?> 元</td>
-                            </tr>
-                            <?php $totalAmount += $item['totalPrice']; ?>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-                <div class="total">
-                    <strong>總金額：<?= $totalAmount ?> 元</strong>
-                </div>
-                <button name="page" value="menuPage">返回菜單</button>
-                <button name="submitOrder" value="1">提交訂單</button>
-                <button name="clearCart" value="1">清空購物車</button>
-            </form>
-        </div>
-    <?php endif; ?>
+                        <?php $totalAmount += $item['totalPrice']; ?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <div class="total">
+                <strong>總金額：<?= $totalAmount ?> 元</strong>
+            </div>
+            
+           
+             
+            
+            <!-- 表單按鈕 -->
+            <button name="page" value="menuPage">返回菜單</button>
+            <button name="submitOrder" value="1">提交訂單</button>
+            <button name="clearCart" value="1">清空購物車</button>
+        </form>
+    </div>
+<?php endif; ?>
+
 
     <!-- 顯示訂單明細 -->
     <?php if ($page === 'orderSummaryPage'): ?>
