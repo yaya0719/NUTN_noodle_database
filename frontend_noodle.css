@@ -205,4 +205,38 @@ section {
     padding: 10px 20px; /* 调整按钮大小 */
     font-size: 16px; /* 调整文字大小 */
 }
+.customer-info {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9; /* 淺灰背景 */
+    border: 1px solid #ddd; /* 邊框 */
+    border-radius: 10px; /* 圓角 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 陰影 */
+}
+
+.customer-info label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333; /* 深灰色文字 */
+}
+
+.customer-info input {
+    width: 100%; /* 滿寬 */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; /* 邊框 */
+    border-radius: 5px; /* 圓角 */
+    font-size: 14px; /* 字體大小 */
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s; /* 交互效果 */
+}
+
+.customer-info input:focus {
+    border-color: #007bff; /* 聚焦時邊框顏色 (藍色) */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* 聚焦時陰影 */
+    outline: none; /* 去除默認邊框 */
+}
+
 
